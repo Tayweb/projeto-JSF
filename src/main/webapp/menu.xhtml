@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:b="http://bootsfaces.net/ui">
+
+<h:head>
+	<title>CRUD</title>
+</h:head>
+
+<h:body>
+
+<b:form>
+
+	<b:navBar inverse="true"
+		style="margin-left: -35%; background: #286090; ">
+		<b:navbarLinks style="margin-left: ">
+			<b:navCommandLink value="Lançamento" action="lancamento"
+				style="color:#fff" />
+			<b:navCommandLink value="Cadastro" action="cadastro"
+				rendered="#{pessoaBean.permiteAcesso('Administrador')}"
+				style="color:#fff" />
+			<b:dropMenu value="Relatórios">
+				<b:navCommandLink value="Lançamentos" action="rellancamento"/>
+				<b:navCommandLink value="Usuários" action="relusuario" />
+			</b:dropMenu>
+			<b:navCommandLink value="Sair" action="#{pessoaBean.deslogar}"
+				style="color:#fff" />
+		</b:navbarLinks>
+	</b:navBar>
+
+</b:form>
+</h:body>
+</html>

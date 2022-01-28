@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" xmlns:b="http://bootsfaces.net/ui">
+
+<h:head>
+	<title>CRUD</title>
+</h:head>
+
+<h:body>
+	<ui:include src="/menu.xhtml"></ui:include>
+	<b:messages id="msg" />
+	<b:form id="formLancamento">
+		<b:panelGrid columns="2">
+			<f:facet name="header">
+				<h:outputText value="Lançamentos" />
+			</f:facet>
+			<b:panel>
+
+				<b:column>
+					<h:outputLabel value="ID:" />
+					<b:inputText value="#{lancamentoBean.lancamento.id}"
+						readonly="true" />
+				</b:column>
+				<b:column>
+					<h:outputLabel value="Nota Fiscal:" />
+					<b:inputText value="#{lancamentoBean.lancamento.numeroNotaFiscal}" />
+				</b:column>
+				
+				<b:column>
+					<b:dateTimePicker format="DD.MM.YYYY" locale="en"
+						value="#{lancamentoBean.lancamento.dataInicial}" label="Data de Inicio" required="true" requiredMessage="Data inicial"/>
+				</b:column>
+				</b:panel>
+				<b:panel>
+				<b:column>
+					<h:outputLabel value="Empresa Origem:" />
+					<b:inputText value="#{lancamentoBean.lancamento.empresaOrigem}" />
+				</b:column>
+				
+				<b:column>
+					<h:outputLabel value="Empresa Destino:" />
+					<b:inputText value="#{lancamentoBean.lancamento.empresaDestino}" />
+				</b:column>
+
+				
+				<b:column>
+					<b:dateTimePicker format="DD.MM.YYYY" locale="en"
+						value="#{lancamentoBean.lancamento.dataFinal}" label="Data Final" required="true" requiredMessage="Data final"/>
+				</b:column>
+			</b:panel>
+		</b:panelGrid>
+
+
+
+
+		<h:outputLabel />
+		<b:column style="margin-bottom:40px">
+			<h:panelGroup>
+				<b:commandButton value="Salvar" action="#{lancamentoBean.salvar}"
+					image="resources/img/salve-.png" style="height:30px; padding:10px"
+					title="Salvar" />
+
+				<b:commandButton value="Novo" action="#{lancamentoBean.novo}"
+					image="resources/img/novo-usuario.png"
+					style="height:30px; padding:10px" title="Novo" />
+
+
+				<b:commandButton value="Limpar" type="reset"
+					image="resources/img/limpar-limpo.png"
+					style="height:30px; padding:10px" title="Limpar" />
+
+			</h:panelGroup>
+
+		</b:column>
+	</b:form>
+	<b:form>
+		<b:dataTable value="#{lancamentoBean.lancamentos}" var="lanc"
+			border="1" cellpadding="6">
+
+			<b:dataTableColumn>
+				<f:facet name="header">ID</f:facet>
+				<h:outputText value="#{lanc.id}" />
+			</b:dataTableColumn>
+
+			<b:dataTableColumn>
+				<f:facet name="header">Nota Fiscal</f:facet>
+				<h:outputLabel value="#{lanc.numeroNotaFiscal}" />
+			</b:dataTableColumn>
+
+			<b:dataTableColumn>
+				<f:facet name="header">Empresa Origem</f:facet>
+				<h:outputLabel value="#{lanc.empresaOrigem}" />
+			</b:dataTableColumn>
+
+			<b:dataTableColumn>
+				<f:facet name="header">Empresa Destino</f:facet>
+				<h:outputLabel value="#{lanc.empresaDestino}" />
+			</b:dataTableColumn>
+
+			<b:dataTableColumn rendered="#{pessoaBean.permiteAcesso('Administrador')}">
+				<f:facet name="header">Ação</f:facet>
+				<h:commandLink title="Editar">
+					<h:graphicImage value="resources/img/editar.png"
+						style="height:25px;" />
+					<f:setPropertyActionListener value="#{lanc}"
+						target="#{lancamentoBean.lancamento}" />
+				</h:commandLink>
+				<h:outputLabel value="    " />
+				<h:commandLink title="Excluir" action="#{lancamentoBean.deletar}">
+					<h:graphicImage value="resources/img/excluir.png"
+						style="height:25px;" />
+					<f:setPropertyActionListener value="#{lanc}"
+						target="#{lancamentoBean.lancamento}" />
+				</h:commandLink>
+			</b:dataTableColumn>
+		</b:dataTable>
+	</b:form>
+</h:body>
+</html>

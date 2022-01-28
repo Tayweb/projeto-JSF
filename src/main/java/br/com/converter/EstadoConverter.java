@@ -1,0 +1,55 @@
+package br.com.converter;
+
+import java.io.Serializable;
+
+import javax.enterprise.inject.spi.CDI;
+import javax.faces.component.UIComponent;
+import javax.faces.context.FacesContext;
+import javax.faces.convert.Converter;
+import javax.faces.convert.FacesConverter;
+import javax.persistence.EntityManager;
+
+import br.com.entidades.Estados;
+
+
+@FacesConverter(forClass = Estados.class, value = "estadoConverter")
+public class EstadoConverter implements Serializable, Converter {
+
+	private static final long serialVersionUID = 1L;
+
+
+	@Override // Retorna o objeto inteiro
+	public Object getAsObject(FacesContext context, UIComponent component, String codigoEstado) {
+		
+		EntityManager entityManager = CDI.current().select(EntityManager.class).get();
+		
+
+		Estados estados = (Estados) entityManager.find(Estados.class, Long.parseLong(codigoEstado));
+
+		return estados;
+	}
+
+	@Override // Retorna apenas o código em String
+	public String getAsString(FacesContext context, UIComponent component, Object estado) {
+
+		if (estado == null) {
+			return null;
+		}
+
+		/*
+		 * O instanceof é um operador que permite testar se um objeto é uma instância de
+		 * um tipo específico de uma class, subclass ou interface. O instanceof em java
+		 * também é conhecida como operador de comparação de tipos, isso porque compara
+		 * a instância com o tipo.
+		 */
+
+		if (estado instanceof Estados) {
+			return ((Estados) estado).getId().toString();
+
+		} else {
+			return estado.toString();
+		}
+
+	}
+
+}

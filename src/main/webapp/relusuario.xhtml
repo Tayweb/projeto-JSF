@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" xmlns:b="http://bootsfaces.net/ui">
+
+<h:head>
+	<title>Relatório de Usuários</title>
+</h:head>
+
+<h:body>
+	<ui:include src="/menu.xhtml"></ui:include>
+	<b:messages id="msg" />
+	<b:form id="relusuario">
+		<b:panelGrid columns="2">
+
+
+
+			<b:column>
+				<h:outputLabel value="Nome:" />
+				<b:inputText value="#{relUsuarioBean.nome}" style="width: 500px"/>
+			</b:column>
+
+			<b:column>
+				<h:outputLabel value="CPF:" />
+				<b:inputText value="#{relUsuarioBean.cpf}" mask="999.999.999-99" style="width: 500px; "/>
+			</b:column>
+
+		</b:panelGrid>
+
+		<b:commandButton value="Buscar"
+			action="#{relUsuarioBean.buscarUsuario}" look="success"
+			style="margin-left:20px; margin-bottom: 50px" />
+
+	</b:form>
+	<b:form>
+		<b:dataTable value="#{relUsuarioBean.pessoa}" var="p" border="1"
+			cellpadding="6" pdf="true" excel="true">
+
+			<b:dataTableColumn value="#{p.cpf}" label="CPF" />
+
+			<b:dataTableColumn value="#{p.nome}" label="Nome" />
+			
+			<b:dataTableColumn value="#{p.sobrenome}" label="Sobrenome" />
+			
+			<b:dataTableColumn value="#{p.cidades.nome}" label="Cidade" />
+			
+			<b:dataTableColumn value="#{p.bairro}" label="Bairro" />
+			
+			<b:dataTableColumn value="#{p.logradouro}" label="Logradouro" />
+			
+			
+			
+
+		</b:dataTable>
+
+
+	</b:form>
+	
+	
+	
+	
+</h:body>
+</html>

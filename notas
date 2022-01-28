@@ -1,0 +1,14 @@
+-Xms512m -Xmx1024m -XX:MaxPermSize=256m
+
+-Xms1024m -Xmx3096m -XX:MaxPermSize=1024m
+
+
+export CATALINA_OPTS="$CATALINA_OPTS -Xms1024m"
+export CATALINA_OPTS="$CATALINA_OPTS -Xmx3096m"
+export CATALINA_OPTS="$CATALINA_OPTS -XX:MaxPermSize=1024m"
+
+
+
+Prezada, prontinho, problema resolvido! :)
+
+Obrigada!!!
